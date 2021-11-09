@@ -1,23 +1,60 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import MaterialTable from 'material-table'; /* importando tabela do MaterialTable */
 
 function App() {
+
+  const colunas=[
+    {
+      title:'Artista',
+      field:'artista'
+    },
+    {
+      title:'Pais de origem',
+      field:'pais'
+    },
+    {
+      title:'Genero(s)',
+      field:'genero'
+    },
+    {
+      title:'Vendas',
+      field:'vendas',
+      type:"numeric"
+    }
+  ];
+
+  const data=[
+    {artista: 'The beatles', pais:'reino Unido', genero:'rock, pop', vendas:1000},
+    {artista: 'Elvis', pais:'Estados unidos', genero:'Rock and roll, country', vendas:1000},
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div >
+      <MaterialTable
+      columns={colunas}
+      data={data}
+      title="Crud em React e Material UI"
+      actions={[
+        {
+        icon:'E',
+        tooltip:'editar',
+        onClick: (event, rowData)=>alert("Editar " +rowData.artista)
+        },
+        {
+        icon:'D',
+        tooltip:'deletar',
+        onClick: (event, rowData)=>alert("Deletar " +rowData.artista)
+        }
+      ]}
+      options={{
+        actionsColumnIndex: -1
+      }}
+      localization={{
+        header: {
+          actions: "Ações Editar/Deletar"
+        }
+      }}
+      />
     </div>
   );
 }
